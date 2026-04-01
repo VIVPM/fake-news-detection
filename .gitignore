@@ -1,0 +1,9 @@
+backend/.venv
+backend/artifacts
+backend/.env
+notebooks/glove
+notebooks/corpora
+frontend/node_modules
+frontend/dist
+notebooks/news/
+notebooks/fake_news.csv

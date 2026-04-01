@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+onnxruntime
+nltk
+numpy
+pydantic
+huggingface_hub
+python-dotenv
