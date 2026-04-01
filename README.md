@@ -13,13 +13,27 @@ A full-stack web application that uses a Bidirectional LSTM neural network and O
 
 ```mermaid
 graph TD
-    Browser["🌐 Browser (React UI)"]
-    FastAPI["⚙️ FastAPI Backend"]
-    HF["🧠 Hugging Face Hub"]
+    Client["🌐 Client Browser (React UI)"] -->|News Text| API["⚙️ FastAPI Backend"]
+    
+    subgraph Text Preprocessing Pipeline
+        API --> Clean["🧹 Clean Text (Lowercase, Regex, Remove Stopwords)"]
+        Clean --> Tokenize["🔡 Tokenize (Word to Index)"]
+        Tokenize --> Pad["📏 Pad Sequences (MaxLen = 100)"]
+    end
 
-    Browser -->|HTTP Request| FastAPI
-    FastAPI -->|Downloads ONNX Model| HF
-    FastAPI -->|Returns Classification| Browser
+    subgraph ONNX Model Inference
+        Pad --> Embed["🧠 GloVe Embedding Layer (50d)"]
+        Embed --> BiLSTM["🔁 Bidirectional LSTM (15 Units)"]
+        BiLSTM --> Pool["🔽 Global Max Pooling 1D"]
+        Pool --> Dense["⚖️ Dense Layer (Sigmoid Activation)"]
+    end
+
+    Dense -->|Confidence Score| Output{"Prediction Computation"}
+    Output -->|Score >= 0.5| Fake["🚨 Fake News"]
+    Output -->|Score < 0.5| Real["✅ Real News"]
+    
+    Fake -->|JSON Response| Client
+    Real -->|JSON Response| Client
 ```
 
 ## Project Structure
