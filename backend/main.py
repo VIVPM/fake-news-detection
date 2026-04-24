@@ -24,6 +24,12 @@ MAX_SEQUENCE_LENGTH = 100
 HF_REPO_ID = os.getenv("HF_REPO_ID", "VPM100/fake-news-detection-model")
 HF_TOKEN = os.getenv("HF_TOKEN")
 
+import nltk
+try:
+    nltk.data.find("corpora/stopwords")
+except LookupError:
+    nltk.download("stopwords", quiet=True)
+
 stop = set(stopwords.words("english"))
 
 # ── global holders ──
