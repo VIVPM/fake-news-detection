@@ -100,7 +100,10 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "http://localhost:5173",
+        "https://fake-news-detection-frontend-9eqd.onrender.com",
+    ],
     allow_methods=["*"],
     allow_headers=["*"],
 )
