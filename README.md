@@ -12,7 +12,7 @@ A full-stack web application that uses a Bidirectional LSTM neural network and O
 ## Architecture
 
 ```mermaid
-graph TD
+graph LR
     Client["🌐 Client Browser (React UI)"] -->|News Text| API["⚙️ FastAPI Backend"]
     
     subgraph Text Preprocessing Pipeline
